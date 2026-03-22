@@ -26,7 +26,6 @@ export CUDA_VISIBLE_DEVICES = 2
 
 ## 📁 Project Structure
 
-```bash
 mri-realism-3d-autoencoder/
 │
 ├── docs/
