@@ -25,14 +25,16 @@ nvidia-smi
 export CUDA_VISIBLE_DEVICES = 2
 
 ## 📁 Project Structure
+
+```bash
 mri-realism-3d-autoencoder/
-###│
-###├── docs/
-###├── scripts/
-###├── examples/
-###├── README.md
-###├── requirements.txt
-###└── .gitignore
+│
+├── docs/
+├── scripts/
+├── examples/
+├── README.md
+├── requirements.txt
+└── .gitignore
 
 ## 📊 Dataset Setup
 Training Dataset
