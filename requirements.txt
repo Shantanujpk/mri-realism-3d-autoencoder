@@ -1,45 +1,36 @@
-## ⚙️ System Requirements
+SYSTEM REQUIREMENTS
 
-### 🖥️ Hardware
-
+Hardware:
 - GPU: NVIDIA RTX 6000 Ada (48 GB VRAM recommended)
 - CPU: Multi-core processor (8+ cores recommended)
 - RAM: 32 GB minimum (64 GB recommended)
-- Storage: 100+ GB (for dataset + checkpoints)
+- Storage: 100+ GB (dataset + checkpoints)
 
----
+--------------------------------------------------
 
-### 🧠 Software Requirements
+Software Requirements:
+- OS: Linux (Ubuntu 20.04+)
+- Python: 3.10
+- CUDA: 12.x / 13.x
+- cuDNN: Compatible with CUDA
+- Conda: Miniconda / Anaconda
 
-| Component | Version |
-|----------|--------|
-| OS | Linux (Ubuntu 20.04+) |
-| Python | 3.10 |
-| CUDA | 12.x / 13.x |
-| cuDNN | Compatible with CUDA |
-| Conda | Miniconda / Anaconda |
+--------------------------------------------------
 
----
-
-### ⚡ GPU & Deep Learning Stack
-
+GPU & Deep Learning Stack:
 - NVIDIA Driver (>= 525)
 - CUDA Toolkit (>= 12.0)
 - cuDNN
 - PyTorch (GPU enabled)
 
----
+--------------------------------------------------
 
-## 📦 Python Dependencies
+PYTHON DEPENDENCIES
 
 Install using:
-
 pip install -r requirements.txt
 
----
-
-### requirements.txt
-
+requirements.txt:
 torch==2.2.0
 torchvision==0.17.0
 numpy
@@ -49,9 +40,9 @@ tqdm
 scikit-learn
 opencv-python
 
----
+--------------------------------------------------
 
-## 🔧 Environment Setup (Recommended)
+ENVIRONMENT SETUP
 
 # Create environment
 conda create -n mri_realism python=3.10 -y
@@ -65,12 +56,12 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 # Install other dependencies
 pip install numpy matplotlib nibabel tqdm scikit-learn opencv-python
 
----
+--------------------------------------------------
 
-## 📂 Dataset Requirements
+DATASET REQUIREMENTS
 
-- Dataset: BraTS 2023 Glioma MRI Dataset
-- Format: NIfTI (.nii.gz)
+Dataset: BraTS 2023 Glioma MRI Dataset
+Format: NIfTI (.nii.gz)
 
 Modalities:
 - T1
@@ -78,24 +69,22 @@ Modalities:
 - T2
 - FLAIR
 
----
+--------------------------------------------------
 
-## 🧠 Libraries Used (Purpose)
+LIBRARIES USED
 
-| Library | Purpose |
-|--------|--------|
-| torch | Deep learning model training |
-| torchvision | Utility functions |
-| numpy | Numerical operations |
-| nibabel | MRI file loading (.nii.gz) |
-| matplotlib | Visualization |
-| tqdm | Progress bars |
-| scikit-learn | Data utilities |
-| opencv | Image processing |
+- torch        → Deep learning model training
+- torchvision  → Utility functions
+- numpy        → Numerical operations
+- nibabel      → MRI file loading (.nii.gz)
+- matplotlib   → Visualization
+- tqdm         → Progress bars
+- scikit-learn → Data utilities
+- opencv       → Image processing
 
----
+--------------------------------------------------
 
-## 🔌 APIs / Techniques Used
+APIS / TECHNIQUES USED
 
 - PyTorch (Deep Learning Framework)
 - CUDA (GPU acceleration)
@@ -104,22 +93,20 @@ Modalities:
 - L1 Loss Optimization
 - Medical Image Processing (NIfTI format)
 
----
+--------------------------------------------------
 
-## ⚠️ Important Notes
+IMPORTANT NOTES
 
-Ensure GPU is available:
-
+Check GPU availability:
 nvidia-smi
 
 Check PyTorch GPU:
-
 python -c "import torch; print(torch.cuda.is_available())"
 
 Use tmux for long training sessions to avoid interruption
 
----
+--------------------------------------------------
 
-## 🚀 Summary
+SUMMARY
 
 This project uses a GPU-accelerated PyTorch pipeline with medical imaging libraries to train a 3D autoencoder for MRI reconstruction efficiently.
