@@ -1,5 +1,8 @@
 # 🧠 MRI Realism using 3D Autoencoder
 
+PIPELINE SUMMARY:
+MRI → Dataset Loader → 3D Autoencoder → Reconstruction → Visualization
+
 This project focuses on reconstructing realistic brain MRI volumes using a 3D Convolutional Autoencoder trained on the BraTS 2023 Glioma Dataset. The pipeline includes data loading, preprocessing, model training, validation, and visualization.
 
 ⸻
@@ -9,6 +12,14 @@ This project focuses on reconstructing realistic brain MRI volumes using a 3D Co
 	•	Model: 3D Convolutional Autoencoder
 	•	Goal: Reconstruct MRI volumes from multi-modal inputs
 	•	Output: High-quality reconstructed MRI slices (Axial, Coronal, Sagittal)
+
+NOTE:
+This project does NOT:
+- Perform segmentation
+- Diagnose disease
+- Replace medical analysis
+It is only for MRI reconstruction research.
+
 
 ## 🖥️ Environment Setup (GPU Server)
 🔐 Step 1: Login to Server
@@ -62,6 +73,15 @@ Trains the refinement model using autoencoder outputs as input and original MRI 
 6. viz_ae_refiner_compare.py
 Compares original, reconstructed, and refined MRI outputs for visual evaluation.
 
+### INPUT:
+BraTS-GLI-00015-000 (4 MRI modalities)
+### OUTPUT:
+ae3d_recon_BraTS-GLI-00015-000.png
+Includes:
+- Original MRI
+- Reconstructed MRI
+- Axial / Coronal / Sagittal views
+
 ## 🏋️ Training the Model
 Set Paths
 cd ~/sjaipurkar/projects/mri_realism
@@ -89,6 +109,20 @@ checkpoint_epoch19.pt
 | 5 | 0.006 |
 
 ✅ Loss decreases consistently → model successfully learns MRI structure.
+
+### EXPECTED RESULT QUALITY:
+- Reconstruction should look smooth and realistic
+- Tumor regions should still be visible
+- Loss should reduce to ~0.006
+
+If output looks wrong → check troubleshooting section
+
+### OUTPUT LOCATION:
+Checkpoints:
+~/sjaipurkar/projects/mri_realism/runs/ae3d_run_big_v2/
+Images:
+examples/ or current working directory
+
 
 ## 🔍 Validation / Inference
 Set Variables
@@ -169,6 +203,23 @@ tqdm
 	•	Dataset is not included due to size
 	•	Requires GPU (48GB VRAM recommended)
 	•	Use tmux for long training sessions
+
+## MINIMUM REQUIREMENTS:
+
+- GPU: 16 GB (slow but works)
+- RAM: 16 GB
+- CPU: 4 cores
+
+## RECOMMENDED:
+
+- GPU: 48 GB
+- RAM: 32–64 GB
+- Multi-core CPU
+
+
+## EXPECTED RUN TIME:
+- Training: 2–5 hours
+- Inference: 10–30 seconds per patient
 
 ## 👨‍💻 Author
 
