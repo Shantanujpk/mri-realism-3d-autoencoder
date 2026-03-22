@@ -1,14 +1,11 @@
 PROJECT EXECUTION FLOW
 
 1. START
-
 You begin by running the training script:
-
 python scripts/train_autoencoder3d.py
 
 
 2. DATA LOADING
-
 Inside train_autoencoder3d.py:
 
 - It calls dataset_gli.py
@@ -17,103 +14,73 @@ Inside train_autoencoder3d.py:
 - Converts them into a tensor [4, H, W, D]
 - Applies normalization
 
-
 3. MODEL INITIALIZATION
-
 - 3D Autoencoder model is created
 - Model has:
   - Encoder (compresses MRI)
   - Decoder (reconstructs MRI)
 
-
 4. TRAINING LOOP STARTS
-
 For each epoch:
-
     a. Input MRI volume is passed to model
-
     b. Encoder compresses the MRI
        → latent representation
-
     c. Decoder reconstructs MRI
        → reconstructed output
-
     d. Loss is calculated:
        L = |Original - Reconstructed|
-
     e. Backpropagation runs
        → model weights updated
-
     f. Loss printed for each epoch
 
 
 5. MODEL SAVING
-
 - After each epoch:
   checkpoint_epochX.pt is saved
-
 - Final model:
   checkpoint_epoch19.pt
-
 
 --------------------------------------------------
 
 6. VALIDATION / TESTING
-
 You run:
-
 python scripts/viz_ae3d_recon.py
 
-
 7. DATA LOADING (AGAIN)
-
 - dataset_gli.py loads validation MRI
 - Selects patient using PATIENT_ID
 
-
 8. MODEL LOADING
-
 - Loads trained checkpoint:
   checkpoint_epoch19.pt
 
-
 9. INFERENCE
-
 - MRI is passed through model:
-
     Input MRI → Encoder → Latent → Decoder → Reconstructed MRI
 
-
 10. VISUALIZATION
-
 - Extracts slices from 3 directions:
     - Axial
     - Coronal
     - Sagittal
-
 - Saves output image:
     ae3d_recon_<patient_id>.png
-
 
 --------------------------------------------------
 
 11. OPTIONAL: REFINER MODEL
 
 Run:
-
 python scripts/train_refiner3d.py
 
 Flow:
-
 - Input = reconstructed MRI
 - Target = original MRI
 - Refiner learns to improve quality
 
 
 Then run:
-
 python scripts/viz_ae_refiner_compare.py
-
 - Shows:
   Original vs Reconstructed vs Refined
 
@@ -121,16 +88,13 @@ python scripts/viz_ae_refiner_compare.py
 --------------------------------------------------
 
 12. END
-
 Final outputs:
 - Trained model (.pt files)
 - Reconstructed MRI images (.png)
 
-
 --------------------------------------------------
 
 SUMMARY FLOW
-
 train_autoencoder3d.py
     ↓
 dataset_gli.py (load data)
