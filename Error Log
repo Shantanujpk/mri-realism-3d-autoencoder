@@ -1,0 +1,213 @@
+COMPLETE ERROR LOG + WHERE TO FIX 
+
+--------------------------------------------------
+SECTION 1: SYSTEM / GPU
+
+1. GPU NOT DETECTED
+Reason: CUDA / environment issue  
+Fix: Terminal (conda activation + torch install)
+
+2. WRONG GPU USED
+Reason: Multiple GPUs  
+Fix: Terminal (set CUDA_VISIBLE_DEVICES)
+
+3. GPU MEMORY FULL
+Reason: Large 3D data  
+Fix: Training config (batch size) + terminal (kill processes)
+
+4. GPU MEMORY NOT FREED
+Reason: Zombie processes  
+Fix: Terminal (kill PID / restart session)
+
+5. LOW GPU UTILIZATION
+Reason: Model not moved to GPU  
+Fix: train_autoencoder3d.py (device usage)
+
+--------------------------------------------------
+SECTION 2: ENVIRONMENT
+
+6. python: not found
+Reason: Conda not active  
+Fix: Terminal (activate environment)
+
+7. PACKAGE NOT FOUND
+Reason: Missing dependency  
+Fix: requirements.txt + pip install
+
+8. WRONG PYTHON PATH
+Reason: Project modules not visible  
+Fix: Terminal (set PYTHONPATH)
+
+--------------------------------------------------
+SECTION 3: DATASET
+
+9. DATASET PATH WRONG
+Reason: Wrong folder  
+Fix: Terminal (MRI_DATA_ROOT)
+
+10. PATIENT NOT FOUND
+Reason: Wrong ID  
+Fix: Terminal (PATIENT_ID)
+
+11. EMPTY DATA
+Reason: Dataset not loading  
+Fix: dataset_gli.py
+
+12. DATA TYPE ISSUE
+Reason: Tensor vs NumPy confusion  
+Fix: dataset_gli.py / viz_ae3d_recon.py
+
+13. LIST INSTEAD OF TENSOR
+Reason: Dataset return format  
+Fix: dataset_gli.py
+
+--------------------------------------------------
+SECTION 4: SHAPE / DIMENSIONS
+
+14. SHAPE MISMATCH (152 vs 155)
+Reason: Depth mismatch  
+Fix: train_autoencoder3d.py (before loss)
+
+15. CHANNEL MISMATCH
+Reason: Missing modalities  
+Fix: dataset_gli.py
+
+16. BATCH DIMENSION MISSING
+Reason: Input shape incorrect  
+Fix: train_autoencoder3d.py / viz_ae3d_recon.py
+
+--------------------------------------------------
+SECTION 5: TRAINING
+
+17. LOSS NOT DECREASING
+Reason: Learning issue  
+Fix: train_autoencoder3d.py (optimizer / LR)
+
+18. TRAINING TOO SLOW
+Reason: CPU usage  
+Fix: GPU setup + train_autoencoder3d.py
+
+19. TRAINING STOPS
+Reason: VPN disconnect  
+Fix: Terminal (tmux)
+
+20. NO EPOCH PRINT
+Reason: No logging  
+Fix: train_autoencoder3d.py
+
+21. NAN LOSS
+Reason: Bad scaling  
+Fix: dataset_gli.py + training config
+
+--------------------------------------------------
+SECTION 6: CHECKPOINTS
+
+22. CHECKPOINT NOT FOUND
+Reason: Env variable missing  
+Fix: Terminal (CKPT)
+
+23. WRONG CHECKPOINT
+Reason: Model mismatch  
+Fix: scripts + correct checkpoint path
+
+24. CHECKPOINT NOT SAVING
+Reason: Path issue  
+Fix: train_autoencoder3d.py (OUTDIR)
+
+--------------------------------------------------
+SECTION 7: INFERENCE
+
+25. MODEL NOT LOADING
+Reason: Path / mismatch  
+Fix: viz_ae3d_recon.py
+
+26. NO OUTPUT IMAGE
+Reason: Script failure  
+Fix: viz_ae3d_recon.py + output path
+
+27. WRONG OUTPUT
+Reason: Wrong patient  
+Fix: Terminal (PATIENT_ID)
+
+--------------------------------------------------
+SECTION 8: VISUALIZATION
+
+28. BLANK IMAGE
+Reason: Scaling issue  
+Fix: viz_ae3d_recon.py
+
+29. DISTORTED IMAGE
+Reason: Wrong slice  
+Fix: viz_ae3d_recon.py
+
+--------------------------------------------------
+SECTION 9: REFINER
+
+30. REFINER WORSE OUTPUT
+Reason: Poor training  
+Fix: train_refiner3d.py (optional usage)
+
+--------------------------------------------------
+SECTION 10: TMUX / SERVER
+
+31. TMUX NOT FOUND
+Reason: Not installed  
+Fix: Terminal (install tmux)
+
+32. LOST SESSION
+Reason: Detached session  
+Fix: Terminal (tmux attach)
+
+--------------------------------------------------
+SECTION 11: GIT
+
+33. PUSH REJECTED
+Reason: Remote ahead  
+Fix: Terminal (git pull --rebase)
+
+34. WRONG AUTHOR
+Reason: Git config  
+Fix: Terminal (git config / amend)
+
+--------------------------------------------------
+SECTION 12: ADDITIONAL COMMON ISSUES
+
+35. PERMISSION DENIED
+Reason: File access  
+Fix: Terminal (chmod / correct path)
+
+36. FILE NOT FOUND
+Reason: Wrong directory  
+Fix: Terminal (cd to project root)
+
+37. WRONG WORKING DIRECTORY
+Reason: Running from wrong folder  
+Fix: Terminal (cd project)
+
+38. IMPORT ERROR (CUSTOM FILES)
+Reason: Script cannot find modules  
+Fix: Terminal (PYTHONPATH)
+
+--------------------------------------------------
+FINAL SUMMARY
+
+Where most fixes happen:
+
+- Terminal → environment, GPU, paths  
+- dataset_gli.py → data loading issues  
+- train_autoencoder3d.py → training + shape issues  
+- viz_ae3d_recon.py → inference + visualization  
+- train_refiner3d.py → refiner issues  
+
+--------------------------------------------------
+BEST PRACTICE
+
+If error occurs:
+
+1. Check GPU → nvidia-smi  
+2. Check path → MRI_DATA_ROOT / CKPT  
+3. Check shape → training script  
+4. Check dataset → dataset_gli.py  
+5. Check output → viz script  
+
+Most problems come from these 5 areas.
