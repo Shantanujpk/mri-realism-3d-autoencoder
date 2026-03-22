@@ -176,7 +176,7 @@ Shantanu Jaipurkar
 MS Information Systems | AI
 
 
-## 🧠 Why 3D Autoencoder for MRI Reconstruction?
+# 🧠 Why 3D Autoencoder for MRI Reconstruction?
 
 ### 🔍 Problem Context
 
