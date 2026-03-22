@@ -78,12 +78,14 @@ checkpoint_epochX.pt
 checkpoint_epoch19.pt
 
 ## 📉 Training Results
-Epoch     Loss
-1          0.028
-2          0.012
-3          0.008
-4          0.007
-5          0.006
+
+| Epoch | Loss |
+|------|------|
+| 1 | 0.028 |
+| 2 | 0.012 |
+| 3 | 0.008 |
+| 4 | 0.007 |
+| 5 | 0.006 |
 
 ✅ Loss decreases consistently → model successfully learns MRI structure.
 
