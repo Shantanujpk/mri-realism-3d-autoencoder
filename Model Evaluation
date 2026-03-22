@@ -1,0 +1,151 @@
+MODEL EVOLUTION (ACTUAL JOURNEY)
+
+1. INITIAL IDEA (GENERATION + LLM THINKING)
+
+What we thought:
+- Use AI / Generative models to create MRI images
+- Considered LLM-based or generative approach
+
+Problem:
+- LLMs are not designed for image reconstruction
+- MRI data is spatial (3D), not text-based
+
+Conclusion:
+❌ Not suitable for this problem
+
+--------------------------------------------------
+
+2. SEGMENTATION-BASED APPROACH
+
+What we tried:
+- Using segmentation-style data / masks
+
+Why:
+- Dataset had segmentation labels
+- Thought it might help guide reconstruction
+
+Problem:
+- Segmentation only gives regions (tumor / non-tumor)
+- Does NOT reconstruct full MRI image
+
+Conclusion:
+❌ Not useful for reconstruction task
+
+--------------------------------------------------
+
+3. 2D IMAGE APPROACH
+
+What we tried:
+- Process MRI slice-by-slice (2D)
+
+Why:
+- Easier to implement
+- Less GPU memory
+
+Problems:
+- MRI is 3D (stack of slices)
+- Model cannot understand depth
+- Output inconsistent across slices
+
+Conclusion:
+❌ Lost spatial information
+
+--------------------------------------------------
+
+4. BASIC AUTOENCODER (EARLY VERSION)
+
+What we tried:
+- Simple autoencoder (initial architecture)
+
+What worked:
+- Model started reconstructing images
+
+Problems:
+- Blurry outputs
+- Size mismatch errors (shape issues like 152 vs 155)
+- Not handling full volume correctly
+
+Conclusion:
+⚠️ Working but unstable
+
+--------------------------------------------------
+
+5. DEBUGGING + ARCHITECTURE FIXES
+
+What we fixed:
+- Tensor size mismatch issues
+- Dataset loading problems
+- Shape consistency (important for 3D)
+
+What improved:
+- Stable training
+- Proper reconstruction pipeline
+
+Conclusion:
+✅ Foundation became strong
+
+--------------------------------------------------
+
+6. FINAL MODEL (3D AUTOENCODER)
+
+What we used:
+- Full 3D convolutional autoencoder
+
+Why:
+- MRI is volumetric (height + width + depth)
+- Model needs to see full brain
+
+What worked:
+- Consistent reconstruction
+- Preserved structure
+- Loss reduced to ~0.006
+
+Conclusion:
+✅ Best performing model
+
+--------------------------------------------------
+
+7. REFINER MODEL
+
+What we tried:
+- Extra network to improve output
+
+Goal:
+- Make images sharper / more realistic
+
+Problem:
+- Sometimes degraded quality
+- Not consistently better than reconstruction
+
+Conclusion:
+⚠️ Optional, not always needed
+
+--------------------------------------------------
+
+FINAL UNDERSTANDING
+
+- MRI is 3D → must use 3D models
+- Simple or 2D models fail
+- Autoencoder works best for reconstruction
+- Refiner is experimental
+
+--------------------------------------------------
+
+SIMPLE EXPLANATION
+
+We tried many ways:
+
+1. LLM / generative → didn’t fit
+2. Segmentation → not the right task
+3. 2D model → lost depth
+4. Early autoencoder → unstable
+5. Fixed model → worked properly
+6. Final 3D autoencoder → best result
+7. Refiner → optional improvement
+
+--------------------------------------------------
+
+FINAL MODEL
+
+3D AUTOENCODER
+→ stable, accurate, and best suited for MRI reconstruction
